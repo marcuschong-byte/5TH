@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine? 💘</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #f9c5d1;
+    font-family: 'Comic Sans MS', cursive;
+    overflow: hidden;
+  }
+
+  /* 🌸 FLOWER FRAME */
+  .flower-frame {
+    position: fixed;
+    inset: 0;
+    background-image: url("images/flower-frame.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* CENTER CONTENT */
+  .wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* 🤍 MAIN CARD */
+  .container {
+    position: relative;
+    background: white;
+    padding: 35px 25px;
+    width: 330px;
+    border-radius: 25px;
+    text-align: center;
+  }
+
+  /* 💖 HEART BORDER */
+  .hearts {
+    position: absolute;
+    font-size: 18px;
+    pointer-events: none;
+  }
+
+  .hearts.top,
+  .hearts.bottom {
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .hearts.top { top: -26px; }
+  .hearts.bottom { bottom: -26px; }
+
+  .hearts.left,
+  .hearts.right {
+    top: 0;
+    bottom: 0;
+    writing-mode: vertical-rl;
+    text-align: center;
+  }
+
+  .hearts.left { left: -26px; }
+  .hearts.right { right: -26px; }
+
+  h1 {
+    color: #e75480;
+  }
+
+  button {
+    padding: 10px 22px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  .yes { background: #ff69b4; color: white; }
+  .no { background: #aaa; color: white; }
+
+  img {
+    width: 200px;
+    margin-top: 15px;
+    border-radius: 12px;
+  }
+
+  #result { display: none; }
+
+  /* 🌧️ EMOJI RAIN */
+  .rain {
+    position: fixed;
+    top: -40px;
+    animation: fall linear forwards;
+    z-index: 5;
+  }
+
+  @keyframes fall {
+    from { transform: translateY(0); }
+    to { transform: translateY(120vh); }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- 🌸 FRAME -->
+<div class="flower-frame"></div>
+
+<div class="wrapper">
+  <div class="container">
+
+    <!-- 💖 HEART OUTLINE -->
+    <div class="hearts top">💖 💕 💗 💓 💞 💘</div>
+    <div class="hearts bottom">💖 💕 💗 💓 💞 💘</div>
+    <div class="hearts left">💖 💕 💗 💓 💞 💘</div>
+    <div class="hearts right">💖 💕 💗 💓 💞 💘</div>
+
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <button class="yes" onclick="yesClicked()">Yes</button>
+    <button class="no" onclick="noClicked()">No</button>
+
+    <div id="result">
+      <h2 id="resultText"></h2>
+      <img id="resultImg">
+    </div>
+
+    <img id="donkey" src="images/donkey.gif" alt="Donkey">
+  </div>
+</div>
+
+<script>
+  function rain(emojis, count, speed) {
+    for (let i = 0; i < count; i++) {
+      let drop = document.createElement("div");
+      drop.className = "rain";
+      drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      drop.style.left = Math.random() * 100 + "vw";
+      drop.style.fontSize = Math.random() * 18 + 18 + "px";
+      drop.style.animationDuration = speed + Math.random() * 2 + "s";
+      document.body.appendChild(drop);
+
+      setTimeout(() => drop.remove(), 9000);
+    }
+  }
+
+  function yesClicked() {
+    document.getElementById("donkey").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("resultText").innerText = "YIPEE!!! 💕🎉";
+    document.getElementById("resultImg").src = "images/roderick.webp";
+
+    rain(["☁️", "💖"], 35, 5);
+  }
+
+  function noClicked() {
+    document.getElementById("donkey").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("resultText").innerText = "";
+    document.getElementById("resultImg").src = "images/alden.jpg";
+
+    rain(["🥺", "😢", "💔"], 35, 4);
+  }
+</script>
+
+</body>
+</html>
